@@ -3,37 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PDF Viewer</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9fafb;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-    header {
-      background-color: #2563eb;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 1.2rem;
-    }
-    iframe {
-      flex-grow: 1;
-      width: 100%;
-      border: none;
-    }
-  </style>
+  <title>HALL RED - PDF Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <header>PDF Viewer Page</header>
+<body class="bg-gray-100 flex flex-col min-h-screen">
 
-  <!-- Hapa ndio PDF itaonekana -->
-  <iframe src="offer.pdf"></iframe>
+  <!-- Header -->
+  <header class="bg-red-700 text-white py-6 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h1 class="text-3xl font-bold">HALL RED</h1>
+      <p class="mt-2 text-sm">MBEZI BEACH BRANCH • Makonde Street • P.O.BOX 11045 DSM</p>
+      <p class="mt-1 text-sm">Tel: (+255) 677 062 607 / 786 640 248 • Email: mbezibranch@kuringe.co.tz</p>
+      <p class="mt-1 text-sm">Instagram: @official_hallred</p>
+    </div>
+  </header>
+
+  <!-- PDF Viewer -->
+  <main class="flex-grow max-w-6xl mx-auto px-4 py-8">
+    <h2 class="text-2xl font-semibold text-center mb-6">PDF Viewer</h2>
+    <div class="border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
+      <!-- Make sure your PDF file is in the root folder of the repo -->
+      <iframe src="offer.pdf" class="w-full h-[80vh]"></iframe>
+    </div>
+    <p class="mt-4 text-center text-gray-600 text-sm">Kumbuka: PDF lazima iwe kwenye root ya repository yako.</p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-4 text-center text-sm">
+    © 2025 Hall Red - Mbezi Beach Branch. All Rights Reserved.
+  </footer>
 
 </body>
 </html>
-
