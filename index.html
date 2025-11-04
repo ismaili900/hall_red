@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HALL RED - PDF Viewer</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.188/pdf_viewer.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.188/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.188/pdf_viewer.min.js"></script>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
 
@@ -13,25 +16,48 @@
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h1 class="text-3xl font-bold">HALL RED</h1>
       <p class="mt-2 text-sm">MBEZI BEACH BRANCH • Makonde Street • P.O.BOX 11045 DSM</p>
-      <p class="mt-1 text-sm">Tel: (+255) 677 062 607 / 786 640 248 • Email: mbezibranch@kuringe.co.tz</p>
-      <p class="mt-1 text-sm">Instagram: @official_hallred</p>
     </div>
   </header>
 
   <!-- PDF Viewer -->
   <main class="flex-grow max-w-6xl mx-auto px-4 py-8">
     <h2 class="text-2xl font-semibold text-center mb-6">PDF Viewer</h2>
-    <div class="border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
-      <!-- Make sure your PDF file is in the root folder of the repo -->
-      <iframe src="offer.pdf" class="w-full h-[80vh]"></iframe>
-    </div>
-    <p class="mt-4 text-center text-gray-600 text-sm">Kumbuka: PDF lazima iwe kwenye root ya repository yako.</p>
+    <div id="pdf-viewer" class="border-2 border-gray-300 rounded-lg shadow-lg w-full h-[80vh]"></div>
   </main>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-gray-400 py-4 text-center text-sm">
     © 2025 Hall Red - Mbezi Beach Branch. All Rights Reserved.
   </footer>
+
+  <script>
+    const url = 'offer.pdf'; // PDF yako lazima iwe kwenye root ya repo
+
+    // Initialize PDF.js
+    const loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(pdf => {
+      pdf.getPage(1).then(page => {
+        const scale = 1.5;
+        const viewport = page.getViewport({ scale: scale });
+
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+        page.render(renderContext);
+
+        document.getElementById('pdf-viewer').appendChild(canvas);
+      });
+    }).catch(err => {
+      document.getElementById('pdf-viewer').innerHTML = "<p class='text-red-600 text-center mt-4'>PDF haikuweza kuonyesha. Angalia kama ipo kwenye root ya repo.</p>";
+      console.error(err);
+    });
+  </script>
 
 </body>
 </html>
